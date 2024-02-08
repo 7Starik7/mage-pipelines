@@ -16,15 +16,9 @@ def export_data_to_google_cloud_storage(data, **kwargs) -> None:
     table_name = "nyc_green_taxi_data"
 
     root_path = f'{bucket_name}/{table_name}'
-    
-    
-
-    # data['lpep_pickup_date'] = data['tpep_pickup_datetime'].dt.date
 
     table = pa.Table.from_pandas(data)
-
     gcs = pa.fs.GcsFileSystem()
-
     pq.write_to_dataset(
         table,
         root_path=root_path,
